@@ -19,20 +19,34 @@ public class Program {
 		// arquivo C:\temp\eleição.txt
 		System.out.print("Entre com o arquivo com as votações de cada urna: ");
 		String path = sc.nextLine();
-
+		System.out.println();
+		
 		try (BufferedReader br = new BufferedReader(new FileReader(path))) {
+			System.out.println("Votos validados:");
 			String line = br.readLine();
 			while (line != null) {
-				
+				System.out.println(line);
+				line = br.readLine();
+			}
+		} 
+		catch (IOException e) {
+			
+		}
+		
+		System.out.println();
+		try (BufferedReader br = new BufferedReader(new FileReader(path))) {
+			System.out.println("Total de votos:");
+			String line = br.readLine();
+			while (line != null) {
+
 				String[] fields = line.split(",");
 				String name = fields[0];
 				int count = Integer.parseInt(fields[1]);
-								
+
 				if (votes.containsKey(name)) {
 					int votesSoFar = votes.get(name);
 					votes.put(name, count + votesSoFar);
-				}
-				else {
+				} else {
 					votes.put(name, count);
 				}
 
